@@ -1,10 +1,12 @@
-# Semantic Continuity — Why Execution Must Not Sever Semantics
+# Semantic Continuity — Keeping Semantics Explicit Through Execution
 
 A central ESKA principle is:
 
-> **Execution must not sever semantics.**
+> **Semantics must remain explicit through execution.**
 
 This means that when formally represented knowledge becomes operational, the running system should not lose the machine-interpretable meaning that explains what the execution is doing, under which conditions it is valid, and how its result relates back to the governing semantic source.
+
+The earlier formulation **“Execution must not sever semantics”** remains useful as explanatory shorthand for the failure mode this positive requirement prevents, but it is no longer the primary normative wording.
 
 ESKA is therefore not only concerned with making knowledge executable. It is concerned with keeping knowledge **semantic while it becomes executable**.
 
@@ -43,7 +45,7 @@ The software can execute, but the runtime system may no longer be able to determ
 
 The execution still works technically, but its semantics have become external knowledge held by developers, documentation, prompts, or convention.
 
-That is what ESKA calls **severing semantics**.
+That is what the earlier shorthand **“execution severs semantics”** describes.
 
 ## Semantic continuity instead
 
@@ -110,6 +112,8 @@ Execution
 ```
 
 The implementation may therefore be optimized, compiled, distributed, wrapped behind an API, or deployed independently without becoming semantically opaque.
+
+An implementation projection is not mandatory. A source-owned semantic artifact may participate in execution directly; when a projection is introduced, its relevant meaning and lineage must remain explicit and traceable to the authoritative source.
 
 ## Provenance is necessary, but not sufficient
 
@@ -285,7 +289,7 @@ Can the architecture determine, in machine-readable form:
 
 If the chain stops at "this function/service produced this output," semantic continuity is weak or broken.
 
-If the chain reaches the formal semantic source and preserves the meaning of the operation along the way, execution has not severed semantics.
+If the chain reaches the formal semantic source and preserves the meaning of the operation along the way, semantics remain explicit through execution.
 
 ## Concise formulation
 
@@ -303,4 +307,6 @@ Executable
 
 That is the architectural commitment expressed by:
 
-> **Execution must not sever semantics.**
+> **Semantics must remain explicit through execution.**
+
+The earlier **“Execution must not sever semantics”** remains a concise way to name the failure this principle is intended to prevent.
