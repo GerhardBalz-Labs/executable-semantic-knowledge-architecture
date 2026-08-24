@@ -420,9 +420,11 @@ GerhardBalz/executable-semantic-knowledge-architecture
 
 Two principles are executable rather than merely documented:
 
-> **Execution must not sever semantics.**
+> **Semantics must remain explicit through execution.**
 
 > **Execution architecture should not become the accidental owner of domain semantics.**
+
+The earlier wording **“Execution must not sever semantics”** remains useful as shorthand for the first principle's failure mode.
 
 ## Source and license
 
