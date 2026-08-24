@@ -8,11 +8,11 @@
 
 A central principle is:
 
-> **Execution must not sever semantics.**
+> **Semantics must remain explicit through execution.**
 
-Executable behavior should remain machine-traceable to the semantic knowledge that gives it meaning.
+Executable behavior should remain machine-traceable to the semantic knowledge that gives it meaning. The earlier wording **“Execution must not sever semantics”** remains useful as explanatory shorthand for the failure mode this positive requirement prevents.
 
-For a deeper explanation of this invariant, including failure modes, provenance versus semantic continuity, and the Pizza example, see [Semantic Continuity — Why Execution Must Not Sever Semantics](docs/semantic-continuity.md).
+For a deeper explanation of this invariant, including failure modes, provenance versus semantic continuity, and the Pizza example, see [Semantic Continuity — Keeping Semantics Explicit Through Execution](docs/semantic-continuity.md).
 
 ```text
 Semantic Knowledge
@@ -337,7 +337,7 @@ Capability / Execution / Result / Verification
 Service / Agent / Deployment
 ```
 
-> **Execution must not sever semantics — and execution architecture should not become the accidental owner of domain semantics.**
+> **Semantics must remain explicit through execution — and execution architecture should not become the accidental owner of domain semantics.**
 
 See [Pizza executable reference](examples/pizza/README.md).
 
@@ -382,7 +382,7 @@ The project intentionally does **not** begin as a general software framework, LL
 ## Documentation
 
 - [Semantic models](model/README.md)
-- [Semantic Continuity — Why Execution Must Not Sever Semantics](docs/semantic-continuity.md)
+- [Semantic Continuity — Keeping Semantics Explicit Through Execution](docs/semantic-continuity.md)
 - [Related Work and ESKA Positioning](docs/related-work.md)
 - [Knowledge Service Generalization](docs/knowledge-service-generalization.md)
 - [Knowledge Agent Generalization](docs/knowledge-agent-generalization.md)
