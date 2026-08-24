@@ -10,9 +10,9 @@ This document positions ESKA against those traditions. Its purpose is not to cla
 
 The defining invariant is therefore:
 
-> **Execution must not sever semantics.**
+> **Semantics must remain explicit through execution.**
 
-ESKA requires concrete execution and results to remain machine-traceable to the formal semantic knowledge and Semantic Capability that give the execution its meaning.
+ESKA requires concrete execution and results to remain machine-traceable to the formal semantic knowledge and Semantic Capability that give the execution its meaning. The earlier wording **“Execution must not sever semantics”** remains useful as explanatory shorthand for the failure mode this invariant prevents.
 
 ## Prior-art qualification
 
