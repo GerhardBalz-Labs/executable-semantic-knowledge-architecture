@@ -25,6 +25,7 @@ jobs:
             accept="$2"
             expected="$3"
             marker="$4"
+            staging_expected="${5:-}"
             headers="$(mktemp)"
             body="$(mktemp)"
             final="$(curl --fail --silent --show-error --location \
@@ -33,8 +34,29 @@ jobs:
               --output "$body" \
               --write-out '%{url_effective}' \
               "$url")"
-            test "$final" = "$expected"
             grep -Eq '^HTTP/.* 303' "$headers"
+
+            first_location="$(grep --ignore-case --max-count=1 '^location:' "$headers" \
+              | sed -E 's/^[^:]+:[[:space:]]*//; s/\r$//' || true)"
+            if test "$first_location" != "$expected"; then
+              echo "ERROR: W3ID target changed for $url [$accept]" >&2
+              echo "expected first Location: $expected" >&2
+              echo "actual first Location:   ${first_location:-<missing>}" >&2
+              return 1
+            fi
+
+            if test "$final" != "$expected"; then
+              if test -z "$staging_expected" || test "$final" != "$staging_expected"; then
+                echo "ERROR: unexpected final target for $url [$accept]" >&2
+                echo "expected final target: $expected" >&2
+                if test -n "$staging_expected"; then
+                  echo "allowed staging target: $staging_expected" >&2
+                fi
+                echo "actual final target:   $final" >&2
+                return 1
+              fi
+            fi
+
             grep -Fq "$marker" "$body"
             echo "PASS $url [$accept] -> $final"
           }
@@ -43,18 +65,21 @@ jobs:
             "https://w3id.org/eska/model/core/0.2.0" \
             "text/turtle" \
             "https://raw.githubusercontent.com/GerhardBalz/executable-semantic-knowledge-architecture/eska-v0.2.0/model/eska-core.ttl" \
-            "https://w3id.org/eska/model/core/0.2.0"
+            "https://w3id.org/eska/model/core/0.2.0" \
+            "https://raw.githubusercontent.com/GerhardBalz-Labs/executable-semantic-knowledge-architecture/eska-v0.2.0/model/eska-core.ttl"
 
           check_route \
             "https://w3id.org/eska/model/core/0.2.0" \
             "text/html" \
             "https://github.com/GerhardBalz/executable-semantic-knowledge-architecture/blob/eska-v0.2.0/model/eska-core.ttl" \
-            "SemanticModel"
+            "SemanticModel" \
+            "https://github.com/GerhardBalz-Labs/executable-semantic-knowledge-architecture/blob/eska-v0.2.0/model/eska-core.ttl"
 
           check_route \
             "https://w3id.org/eska/dist/0.2.0/eska-core.ttl" \
             "text/turtle" \
             "https://raw.githubusercontent.com/GerhardBalz/executable-semantic-knowledge-architecture/eska-v0.2.0/model/eska-core.ttl" \
-            "https://w3id.org/eska/model/core/0.2.0"
+            "https://w3id.org/eska/model/core/0.2.0" \
+            "https://raw.githubusercontent.com/GerhardBalz-Labs/executable-semantic-knowledge-architecture/eska-v0.2.0/model/eska-core.ttl"
 
           echo "SUCCESS: immutable ESKA core 0.2.0 W3ID routes resolve to eska-v0.2.0."
